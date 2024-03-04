@@ -1,0 +1,45 @@
+{
+  "name": "@antify/dev-module",
+  "version": "1.0.0",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
+  "main": "./dist/module.cjs",
+  "types": "./dist/types.d.ts",
+  "files": [
+    "dist",
+    "src/runtime/components/**/*.vue"
+  ],
+  "scripts": {
+    "prepack": "nuxt-module-build build",
+    "dev": "nuxi dev playground",
+    "dev:build": "nuxi build playground",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
+    "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@antify/ant-guard": "file:../antify/packages/ant-guard",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@nuxt/kit": "^3.8.2",
+    "date-fns": "^2.30.0",
+    "h3": "^1.7.1"
+  },
+  "devDependencies": {
+    "@nuxt/eslint-config": "latest",
+    "@nuxt/module-builder": "^0.5.4",
+    "@nuxt/schema": "^3.8.2",
+    "eslint": "latest",
+    "eslint-plugin-storybook": "latest",
+    "nuxt": "^3.8.2"
+  },
+  "peerDependencies": {
+    "@antify/ui-module": "file:../ui-module"
+  }
+}
